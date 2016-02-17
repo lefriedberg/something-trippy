@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Because why not</title>
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <style type="text/css">
+			/* No style rules here yet */		
+		</style>
+	</head>
+    <p>This is a very useful website</p>
+    <body>
+        <script type="text/javascript">
+            var theData=[1,2,3, 4,5,6,7,8,9,10,11,12,13,14,15,16,15,14,13, 12, 11,10, 9,8,7,6,5,4,3,2,1]
+            /*var p =d3.select("body").selectAll("p")
+                .data(theData)
+                .enter()
+                .append("p")
+                .text(function (d, i){return i*d;}); 
+                */
+            
+            
+            var svg =d3.select("body").append("svg")
+                .attr("width", 1300)
+                .attr("height", 800)
+            var circle =svg.selectAll("circle")
+                .data(theData)
+                .enter()
+                .append("circle")
+                .attr("cy", function(d, i){
+                    if(i>15)
+                        return(16*2-d)*25;
+                    return d*25;})
+                .attr("cx", function(d, i) {
+                    if(i>15)
+                        return(16*2-d)*40;                    
+                    return d*40;})
+                .attr("r", function(d){return d*9/8;})
+                .style("fill", "pink")
+
+                .style("stroke", "hotpink")
+                .style("fill-opacity", "1%")
+                .style("stroke-width", 2);
+            function on(){
+                    circle
+                    .transition()
+                    .attr("r", function(d){return d*25;})
+                    .style("fill-opacity", function(d){
+                        return((d+5)/100);
+                    })
+                    .duration(5000)
+                    .delay(50);}
+        function off(){
+                    circle
+                    .transition()
+                    .attr("r", function(d){return d*9/8;})
+                    .style("fill-opacity", function(d){
+                        return((d-5)/100);
+                    })
+                    .duration(4000)
+                    .delay(50);}
+
+            
+        </script>                    
+             <div id="option">
+        <input name="button" 
+                 type="button" 
+                value="enlarge" 
+                onclick="on()" />
+        <input name="button" 
+                 type="button" 
+                value="return" 
+                onclick="off()" />
+        </div>
+    </body>
+</html>
+    
+    
